@@ -1,8 +1,10 @@
 package com.example.antonio.multipleitemslist2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.antonio.multipleitemslist2.ShowImage.PhotoFullPopupWindow;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -64,11 +67,17 @@ public class PicassoExampleActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             if (null == convertView) {
                 convertView = inflater.inflate(R.layout.grid_item, parent, false);
             }
-
+           ImageView image_gridView=convertView.findViewById(R.id.image_gridView);
+            image_gridView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new PhotoFullPopupWindow(context, R.layout.popup_photo_full, view, URL_Header+imageUrls[position], null);
+                }
+            });
 
             Picasso.with(context)
                     .load(URL_Header+imageUrls[position])
@@ -79,6 +88,24 @@ public class PicassoExampleActivity extends AppCompatActivity {
 
             return convertView;
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+    PhotoFullPopupWindow photoFullPopupWindow=new PhotoFullPopupWindow(this);
+
+
+            if(photoFullPopupWindow.isShowing())
+                photoFullPopupWindow.dismiss();
+            else
+                super.onBackPressed();
+
+
+
+        Log.v("backBtn","true");
+
     }
 
 }
