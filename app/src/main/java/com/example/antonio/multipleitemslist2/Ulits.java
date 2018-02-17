@@ -12,4 +12,9 @@ public class Ulits {
 //else {
 //        //Whatever
 //    }
+
+    //icon drawer
+    //mDrawerToggle.syncState();
+    //for video player
+    //https://github.com/afollestad/easy-video-player
 }
