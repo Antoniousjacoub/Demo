@@ -15,6 +15,6 @@ public class Ulits {
 
     //icon drawer
     //mDrawerToggle.syncState();
-    //for video player
+    //for videoplayer
     //https://github.com/afollestad/easy-video-player
 }
