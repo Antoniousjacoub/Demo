@@ -8,9 +8,9 @@ import android.util.Log;
  */
 
 public class Constants {
-
+//8 .4
     private static final float BITMAP_SCALE = 0.4f;
-    private static final int BLUR_RADIUS = 8;
+    private static final int BLUR_RADIUS = 10;
 
     public static Bitmap fastblur(Bitmap sentBitmap) {
         float scale = BITMAP_SCALE;

@@ -1,6 +1,7 @@
 package com.example.antonio.multipleitemslist2;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
@@ -23,5 +24,20 @@ public class Settings {
 
         }
         return false;
+    }
+
+   public static boolean setPreference(Context c, String value, String key) {
+        SharedPreferences settings = c.getSharedPreferences("photoPref", 0);
+        settings = c.getSharedPreferences("photoPref", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString(key, value);
+        return editor.commit();
+    }
+
+   public static String getPreference(Context c, String key) {
+        SharedPreferences settings = c.getSharedPreferences("photoPref", 0);
+        settings = c.getSharedPreferences("photoPref", 0);
+        String value = settings.getString(key, "");
+        return value;
     }
 }

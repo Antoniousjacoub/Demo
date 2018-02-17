@@ -1,11 +1,13 @@
 package com.example.antonio.multipleitemslist2.ShowImage;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -31,7 +33,7 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
  */
 
 public class PhotoFullPopupWindow extends PopupWindow {
-
+    Bitmap mBitmap;
     View view;
     Context mContext;
     PhotoView photoView;
@@ -40,10 +42,11 @@ public class PhotoFullPopupWindow extends PopupWindow {
     private static PhotoFullPopupWindow instance = null;
 
 
+
 public PhotoFullPopupWindow(Context context){
    this.mContext=context;
 }
-    public PhotoFullPopupWindow(Context ctx, int layout, View v, String imageUrl, Bitmap bitmap) {
+    public PhotoFullPopupWindow(Context ctx, int layout, View v,  Bitmap bitmap,String imageUrl) {
         super(((LayoutInflater) ctx.getSystemService(LAYOUT_INFLATER_SERVICE)).inflate( R.layout.popup_photo_full, null), ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
 
@@ -51,6 +54,7 @@ public PhotoFullPopupWindow(Context context){
             setElevation(5.0f);
         }
         this.mContext = ctx;
+        this.mBitmap=bitmap;
         this.view = getContentView();
         ImageButton closeButton = (ImageButton) this.view.findViewById(R.id.ib_close);
         setOutsideTouchable(true);
@@ -68,41 +72,38 @@ public PhotoFullPopupWindow(Context context){
 
         photoView = (PhotoView) view.findViewById(R.id.image);
         loading = (ProgressBar) view.findViewById(R.id.loading);
+        //6
         photoView.setMaximumScale(6);
         parent = (ViewGroup) photoView.getParent();
         // ImageUtils.setZoomable(imageView);
         //----------------------------
-        if (bitmap != null) {
+        if (mBitmap != null) {
             loading.setVisibility(View.GONE);
             if (Build.VERSION.SDK_INT >= 16) {
-                parent.setBackground(new BitmapDrawable(mContext.getResources(), Constants.fastblur(Bitmap.createScaledBitmap(bitmap, 50, 50, true))));// ));
+                parent.setBackground(new BitmapDrawable(mContext.getResources(), Constants.fastblur(Bitmap.createScaledBitmap(mBitmap, 50, 50, true))));// ));
             } else {
-                onPalette(Palette.from(bitmap).generate());
+                onPalette(Palette.from(mBitmap).generate());
 
             }
-            photoView.setImageBitmap(bitmap);
+            photoView.setImageBitmap(mBitmap);
+            showAtLocation(v, Gravity.CENTER, 0, 0);
         } else {
             loading.setIndeterminate(true);
             loading.setVisibility(View.VISIBLE);
-            Glide.with(ctx) .asBitmap()
-                    .load(imageUrl)
-
-                    //.error(R.drawable.ic_launcher_background)
-                    .listener(new RequestListener<Bitmap>() {
+            Glide.with(ctx) .asBitmap().load(imageUrl)//.error(R.drawable.ic_launcher_background)
+            .listener(new RequestListener<Bitmap>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
                             loading.setIndeterminate(false);
                             loading.setBackgroundColor(Color.LTGRAY);
                             return false;
                         }
-
-                        @Override
+                @Override
                         public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
                             if (Build.VERSION.SDK_INT >= 16) {
                                 parent.setBackground(new BitmapDrawable(mContext.getResources(), Constants.fastblur(Bitmap.createScaledBitmap(resource, 50, 50, true))));// ));
                             } else {
                                 onPalette(Palette.from(resource).generate());
-
                             }
                             photoView.setImageBitmap(resource);
 
@@ -121,6 +122,7 @@ public PhotoFullPopupWindow(Context context){
         //------------------------------
 
     }
+
 
     public void onPalette(Palette palette) {
         if (null != palette) {

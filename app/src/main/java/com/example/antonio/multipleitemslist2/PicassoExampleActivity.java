@@ -75,7 +75,7 @@ public class PicassoExampleActivity extends AppCompatActivity {
             image_gridView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    new PhotoFullPopupWindow(context, R.layout.popup_photo_full, view, URL_Header+imageUrls[position], null);
+                    new PhotoFullPopupWindow(context, R.layout.popup_photo_full, view,  null,URL_Header+imageUrls[position]);
                 }
             });
 
@@ -91,21 +91,6 @@ public class PicassoExampleActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public void onBackPressed() {
 
-    PhotoFullPopupWindow photoFullPopupWindow=new PhotoFullPopupWindow(this);
-
-
-            if(photoFullPopupWindow.isShowing())
-                photoFullPopupWindow.dismiss();
-            else
-                super.onBackPressed();
-
-
-
-        Log.v("backBtn","true");
-
-    }
 
 }
