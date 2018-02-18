@@ -98,4 +98,35 @@ public class Ulits {
 //}
 //
 
+
+
+
+
+
+//
+//    private boolean loadMore = true;
+//    private int pastVisiblesItems, visibleItemCount, totalItemCount;
+//     listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+//        @Override
+//        public void onScrollStateChanged(AbsListView absListView, int i) {
+//        }
+//
+//        @Override
+//        public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+//            visibleItemCount = listView.getChildCount();
+//            totalItemCount = listView.getCheckedItemCount();
+//            pastVisiblesItems = listView.getFirstVisiblePosition();
+//            if (loadMore) {
+//                if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+//                    soundListSearch.add(null);
+//                    new LoadDataTask().execute();
+//                }
+//            }
+//        }
+//    });
+//    And finally loadMore=false
+//
+//
+//
+
 }
