@@ -48,4 +48,54 @@ public class Ulits {
 //        });
 //    }
 //
+// Implement scroll listener
+//private void implementScrollListener() {
+//    listRecyclerView
+//            .addOnScrollListener(new RecyclerView.OnScrollListener() {
+//
+//                @Override
+//                public void onScrollStateChanged(RecyclerView recyclerView,
+//                                                 int newState) {
+//
+//                    super.onScrollStateChanged(recyclerView, newState);
+//
+//                    // If scroll state is touch scroll then set userScrolled
+//                    // true
+//                    if (newState == OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+//                        userScrolled = true;
+//
+//                    }
+//
+//                }
+//
+//                @Override
+//                public void onScrolled(RecyclerView recyclerView, int dx,
+//                                       int dy) {
+//
+//                    super.onScrolled(recyclerView, dx, dy);
+//                    // Here get the child count, item count and visibleitems
+//                    // from layout manager
+//
+//                    visibleItemCount = mLayoutManager.getChildCount();
+//                    totalItemCount = mLayoutManager.getItemCount();
+//                    pastVisiblesItems = mLayoutManager
+//                            .findFirstVisibleItemPosition();
+//
+//                    // Now check if userScrolled is true and also check if
+//                    // the item is end then update recycler view and set
+//                    // userScrolled to false
+//                    if (userScrolled
+//                            && (visibleItemCount + pastVisiblesItems) == totalItemCount) {
+//                        userScrolled = false;
+//
+//                        updateRecyclerView();
+//                    }
+//
+//                }
+//
+//            });
+//
+//}
+//
+
 }
