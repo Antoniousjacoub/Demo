@@ -59,7 +59,14 @@ public class MainActivity extends AppCompatActivity implements AbsListView.OnScr
 
 
     private void initViews(){
-
+Button btn_test_framlaout = findViewById(R.id.btn_test_framlaout);
+        btn_test_framlaout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+Intent intent = new Intent(MainActivity.this,FramlayoutActivity.class);
+startActivity(intent);
+            }
+        });
         Button btn_set_image=findViewById(R.id.btn_set_image);
         btn_set_image.setOnClickListener(new View.OnClickListener() {
             @Override
